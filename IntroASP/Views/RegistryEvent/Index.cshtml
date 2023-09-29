@@ -1,0 +1,38 @@
+﻿@model List<IntroASP.Models.RegistryEvent>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<h1>Tabla total registros</h1>
+<a href="@Url.Action("ExportToCSV", "RegistryEvent")" class="btn btn-primary">Exportar Excel</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Correo Institucional</th>
+            <th>Programa Académico</th>
+            <th>Asignatura</th>
+            @foreach (var date in ViewBag.UniqueDates)
+            {
+                <th>@($"Asistió-{date}")</th>
+            }
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var registryEvent in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(m => registryEvent.Nombre)</td>
+                <td>@Html.DisplayFor(m => registryEvent.CorreoInstitucional)</td>
+                <td>@Html.DisplayFor(m => registryEvent.ProgramaAcademico)</td>
+                <td>@Html.DisplayFor(m => registryEvent.Asignatura)</td>
+                @foreach (var date in ViewBag.UniqueDates)
+                {
+                    <td>@ViewBag.AttendanceRecords[registryEvent.CorreoInstitucional][date]</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+<canvas id="attendanceChart" width="400" height="200"></canvas>

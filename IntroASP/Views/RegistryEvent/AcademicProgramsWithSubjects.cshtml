@@ -1,0 +1,22 @@
+﻿<a href="@Url.Action("ExportAcademicProgramsWithSubjectsToCSV", "RegistryEvent")" class="btn btn-primary">Exportar a CSV</a>
+
+<table style="border-collapse: collapse; width: 100%; border: 1px solid #ddd;">
+    <thead>
+        <tr>
+            <th style="border: 1px solid #ddd; padding: 8px;">Programa Académico</th>
+            <th style="border: 1px solid #ddd; padding: 8px;">Asignaturas</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var program in ViewBag.ProgramWithSubjects)
+        {
+            if (program.Value.Count > 2)
+            {
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">@program.Key</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">@string.Join(", ", program.Value)</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

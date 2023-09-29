@@ -1,0 +1,42 @@
+﻿@using IntroASP.Models.ViewModels
+@model BeerViewModel
+
+
+<h1>Crear Cerveza</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                 <input asp-for="Name"  class="form-control"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="BrandId" class="control-label"></label>
+                <select asp-for="BrandId" class="form-control" asp-items="ViewBag.Brands"></select>
+                <span asp-validation-for="BrandId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@* agregamos un section que es para poner algo en un lugar de tu pantalla principal, si recordamos nuestra pantalla 
+principal es el layout que comparten 
+*@
+
+@section Scripts{
+    @{
+        // una vista parcial sirve para meterla intermediamente en lugares 
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
